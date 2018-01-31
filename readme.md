@@ -12,7 +12,7 @@ Our objectives for the skill:
 
 Examples of use:
 - "Alexa, ask Crypto Quote how much is Bitcoin"
-- "Alexa, ask Crypto Quote how much Ethereum I can buy for $500"
+- "Alexa, ask Crypto Quote how much Ethereum I can get for $500"
 
 Skills are designed around skill invocation. The basic flow is as follows:
 
