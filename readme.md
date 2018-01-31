@@ -11,7 +11,7 @@ Our objectives for the skill:
 2. Ask how much of the selected coin you can purchase for a given USD amount
 
 Examples of use:
-- "Alexa, ask Crypto Quote for the price of Bitcoin"
+- "Alexa, ask Crypto Quote how much is Bitcoin"
 - "Alexa, ask Crypto Quote how much Ethereum I can buy for $500"
 
 Skills are designed around skill invocation. The basic flow is as follows:
