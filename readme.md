@@ -98,12 +98,22 @@ Next, you'll need to enter the sample utterances. The following should suffice a
 
 ```
 GetPrice How much is {Coin}
+GetPrice How much {Coin} is going for
+GetPrice How much does {Coin} cost
+GetPrice How much {Coin} costs
+GetPrice How much is {Coin} right now
 GetPrice What is the price for {Coin}
-GetPrice Current {Coin} value
+GetPrice What {Coin} costs
 GetPrice {Coin} value
-
+GetPrice {Coin} value
 GetAmount How many {Coin} can I get for {Amount} dollars
 GetAmount How much {Coin} can I get for {Amount} dollars
+GetAmount How many {Coin} can I buy for {Amount} dollars
+GetAmount How much {Coin} can I buy for {Amount} dollars
+GetAmount How many {Coin} I can get for {Amount} dollars
+GetAmount How much {Coin} I can get for {Amount} dollars
+GetAmount How many {Coin} I can buy for {Amount} dollars
+GetAmount How much {Coin} I can buy for {Amount} dollars
 GetAmount Amount of {Coin} for {Amount} dollars
 GetAmount Number of {Coin} for {Amount} dollars
 ```

@@ -19,27 +19,28 @@ const sampleCommands = `
 
 const skillText = `
   Hello from crypto quote.
-  I can give you the info about Bitcoin, Ethereum, and Litecoin prices.
-  How can I help you today?
+  I can give you the info about Bitcoin, Ethereum, and Litecoin sprices.
+  What can I do for you?
   ${sampleCommands}
 `;
 
 const errorText = `
-  ${Object.keys(tokens).join('')} are the supported cryptocurrencies at this time.
+  ${Object.keys(tokens).join(', ')} are the supported cryptocurrencies at this time.
 `;
 
 function kryptoKwote (event, context, callback) {
   console.log(event);
 
   alexaSkillKit(event, context, (message) => {
+    console.log(message);
     if (message.type === 'LaunchRequest') {
       return new MessageTemplate()
         .addText(skillText)
-        .addReprompt(sampleCommands)
+        .addRepromptText(sampleCommands)
         .keepSession()
         .get();
     } else {
-      const token = message.intent.slots.Coin.value;
+      const token = ((((message || {}).intent || {}).slots || {}).Coin || {}).value;
       if (Object.keys(tokens).indexOf(token.toLowerCase()) < 0) {
         return errorText;
       }
@@ -47,16 +48,14 @@ function kryptoKwote (event, context, callback) {
         // Get the price for selected crypto currency
         return cryptoCompare
           .price(tokens[token], 'USD')
-          .then(prices => `${token} is currently ${prices.USD} dollars`)
-          .catch(e => console.error(e));
+          .then(prices => `At the moment, ${token} is ${prices.USD} dollars`);
       }
       if (message.intent.name === 'GetAmount') {
-        const amount = Number(message.intent.slots.Amount.value)
+        const amount = Number(((((message || {}).intent || {}).slots || {}).Amount || {}).value);
         // Get an amount of crypto currency that user can get for specified amount of USD
         return cryptoCompare
           .price(tokens[token], 'USD')
-          .then(prices => `You can buy ${amount / prices.USD} ${token} for ${amount} dollars`)
-          .catch(e => console.error(e));
+          .then(prices => `You can buy ${amount / prices.USD} ${token} for ${amount} dollars`);
       }
     }
 

@@ -2,6 +2,6 @@
   "lambda": {
     "role": "krypto-kwote-skill-executor",
     "name": "krypto-kwote-skill",
-    "region": "eu-west-1"
+    "region": "us-east-1"
   }
 }
