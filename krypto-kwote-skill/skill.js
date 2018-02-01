@@ -8,7 +8,9 @@ const cryptoCompare = require('cryptocompare');
 const tokens = {
   bitcoin: 'BTC',
   ethereum: 'ETH',
-  litecoin: 'LTC'
+  ether: 'ETH',
+  litecoin: 'LTC',
+  lightcoin: 'LTC'
 };
 
 const sampleCommands = `
@@ -25,10 +27,16 @@ const skillText = `
 `;
 
 const errorText = `
-  ${Object.keys(tokens).join(', ')} are the supported cryptocurrencies at this time.
+  Bitcoin, Ethereum, and Lightcoin are the only supported cryptocurrencies at this time.
 `;
 
-function kryptoKwote (event, context, callback) {
+const phrasing = [
+  'At the moment',
+  'Currently',
+  'Right now'
+];
+
+function kryptoKwote (event, context) {
   console.log(event);
 
   alexaSkillKit(event, context, (message) => {
@@ -40,7 +48,7 @@ function kryptoKwote (event, context, callback) {
         .keepSession()
         .get();
     } else {
-      const token = ((((message || {}).intent || {}).slots || {}).Coin || {}).value;
+      const token = ((((message || {}).intent || {}).slots || {}).Coin || {}).value || '';
       if (Object.keys(tokens).indexOf(token.toLowerCase()) < 0) {
         return errorText;
       }
@@ -48,17 +56,17 @@ function kryptoKwote (event, context, callback) {
         // Get the price for selected crypto currency
         return cryptoCompare
           .price(tokens[token], 'USD')
-          .then(prices => `At the moment, ${token} is ${prices.USD} dollars`);
+          .then(prices =>
+            `${phrasing[Math.floor(Math.random() * phrasing.length)]}, ${token} is ${prices.USD} dollars`);
       }
       if (message.intent.name === 'GetAmount') {
-        const amount = Number(((((message || {}).intent || {}).slots || {}).Amount || {}).value);
+        const amount = Number(((((message || {}).intent || {}).slots || {}).Amount || {}).value || 1);
         // Get an amount of crypto currency that user can get for specified amount of USD
         return cryptoCompare
           .price(tokens[token], 'USD')
           .then(prices => `You can buy ${amount / prices.USD} ${token} for ${amount} dollars`);
       }
     }
-
   });
 }
 
